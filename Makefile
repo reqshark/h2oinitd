@@ -11,7 +11,7 @@ HAVE_GAWK := $(shell which gawk)
 HAVE_CMAKE := $(shell which cmake)
 
 ifndef HAVE_GIT
-	$(error git is missing)
+$(error git is missing)
 endif
 ifndef HAVE_CURL
 $(error curl is missing)
