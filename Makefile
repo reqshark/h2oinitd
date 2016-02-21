@@ -1,4 +1,4 @@
-.PHONY: preinst h2o
+.PHONY: install h2o
 
 # check for basic deps
 HAVE_GIT := $(shell which git)
@@ -9,6 +9,7 @@ HAVE_AUTOMAKE := $(shell which automake)
 HAVE_AUTOCONF := $(shell which autoconf)
 HAVE_GAWK := $(shell which gawk)
 HAVE_CMAKE := $(shell which cmake)
+HAVE_H2O := $(shell which h2o)
 
 ifndef HAVE_GIT
 $(error git is missing)
@@ -35,11 +36,26 @@ ifndef HAVE_CMAKE
 $(error cmake is missing)
 endif
 
-ALL: preinst
-	echo "made"
+eq = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
 
-preinst:
-	sudo ./setup.sh
+ALL:
+	$(if $(HAVE_H2O), @echo h2o installed. sudo make install, $(shell ./setup.sh))
+
+install:
+	$(if $(call eq, $(shell whoami), root), @echo installing, \
+	$(error install as root. perhaps try sudo make install))
+	if [ -f "/etc/init.d/h2o" ];then /etc/init.d/h2o stop && rm /etc/init.d/h2o;fi
+	if [ -d "/etc/h2o" ]; then rm -f /etc/h2o/h2o.conf; else mkdir /etc/h2o; fi
+	if [ ! -d "/srv" ]; then mkdir /srv; fi
+	if [ ! -d "/srv/h2o" ]; then mkdir /srv/h2o; fi
+	if [ -f "/srv/h2o/index.html" ]; then rm /srv/h2o/index.html; fi
+	if [ ! -d "/var/log" ]; then mkdir /var/log; fi
+	cp srv/h2o/index.html /srv/h2o/index.html
+	cp etc/h2o/h2o.conf /etc/h2o/h2o.conf
+	cp etc/init.d/h2o /etc/init.d/h2o
+	chmod a+x /etc/init.d/h2o
+	update-rc.d h2o defaults
+	@echo init.d service installed
 
 h2o:
-	sudo ./setup.sh
+	./setup.sh

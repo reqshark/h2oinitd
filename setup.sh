@@ -1,12 +1,5 @@
 #!/bin/bash
 
-echo "h2o wasnt found"; sleep 1; echo "so we're going to install it...";sleep 1;
-echo "this may take a while.."; sleep 1;
-
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install python-sphinx libcunit1-dev nettle-dev libyaml-dev locate \
-git-core cmake build-essential checkinstall autoconf pkg-config libtool -y
-
 git clone --depth 1 https://github.com/libuv/libuv.git && cd libuv
 ./autogen.sh && ./configure && make && sudo make install && sudo /sbin/ldconfig
 cd .. && rm -rf libuv

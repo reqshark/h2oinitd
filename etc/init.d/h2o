@@ -7,7 +7,7 @@
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
 # Short-Description: start and stop h2o
-# Description: so dope
+# Description: so fresh
 ### END INIT INFO
 
 INSTDIR=/usr/local/bin
@@ -26,9 +26,9 @@ case $1 in
   stop)
     if [ -f "/var/run/h2o.pid" ]; then
       kill `cat /var/run/h2o.pid`
+      echo stopped
     fi
-    echo stopped.
-    exit 1
+    exit 0
     ;;
   status)
     if [ -f "/var/run/h2o.pid" ]; then
@@ -36,7 +36,7 @@ case $1 in
     else
       echo stopped
     fi
-    exit 1
+    exit 0
     ;;
   restart)
     $0 stop && $0 start
