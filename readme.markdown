@@ -6,6 +6,8 @@ $ cd h2oconf
 $ ./configure
 $ make                # installs h2o in /usr/local/bin
 $ sudo make install   # installs an init.d service for h2o
+
+$ /etc/init.d/h2o start
 ```
 
 to update your h2o installation do:

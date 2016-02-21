@@ -25,3 +25,4 @@ cd .. && sudo rm -rf h2o-1.7.0
 
 echo "h2o installed"
 h2o --version
+exit 0;
