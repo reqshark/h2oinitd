@@ -39,7 +39,25 @@ endif
 eq = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
 
 ALL:
-	$(if $(HAVE_H2O), @echo h2o installed. sudo make install, $(shell ./setup.sh))
+	$(if $(HAVE_H2O), $(error h2o already installed. do sudo make install), \
+	@echo installing h2o)
+	git clone --depth 1 https://github.com/libuv/libuv.git && libuv/autogen.sh
+	cd libuv && ./configure
+	cd libuv && make && sudo make install && sudo /sbin/ldconfig
+	rm -rf libuv && git clone --depth 1 https://github.com/tatsuhiro-t/wslay.git
+	cd wslay && autoreconf -i && automake && autoconf && ./configure && make
+	cd wslay && sudo make install && sudo /sbin/ldconfig
+	rm -rf wslay
+	wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2f.tar.gz
+	tar xzvf OpenSSL_1_0_2f.tar.gz && rm OpenSSL_1_0_2f.tar.gz
+	mv openssl-OpenSSL_1_0_2f ssl
+	cd ssl && ./config --prefix=/usr/local --openssldir=/usr/local/openssl
+	cd ssl && make && sudo make install && sudo /sbin/ldconfig
+	rm -rf ssl && wget https://github.com/h2o/h2o/archive/v1.7.0.tar.gz
+	tar xzvf v1.7.0.tar.gz && rm v1.7.0.tar.gz
+	cd h2o-1.7.0 && cmake -DWITH_BUNDLED_SSL=off . && make && sudo make install
+	sudo /sbin/ldconfig && rm -rf h2o-1.7.0
+	echo "h2o installed" && h2o --version
 
 install:
 	$(if $(call eq, $(shell whoami), root), @echo installing, \

@@ -4,16 +4,17 @@ APT=`which apt`
 if [ -x "$APT" ]; then
   echo "apt is executable, it's ubuntu or debian..."; sleep 1;
   sudo apt-get update && sudo apt-get upgrade -y
-  sudo apt-get install git build-essential cmake python-sphinx libcunit1-dev   \
-  nettle-dev libyaml-dev locate checkinstall autoconf pkg-config libtool gawk -y
+  sudo apt-get install git build-essential cmake zlib1g-dev python-sphinx \
+  libcunit1-dev nettle-dev libyaml-dev locate checkinstall autoconf pkg-config \
+  libtool gawk -y
   echo "deps up-to-date"; echo ".."; echo "configured";
-  exit 1;
+  exit 0;
 else
   echo "this isnt a debian or ubuntu"
   echo "please install:"
-  echo "git make libc gcc g++ cmake libyaml gettext gawk"
+  echo "zlib git make libc gcc g++ cmake libyaml gettext gawk"
   echo "locate autoconf automake pkg-config libtool, etc."
   echo "..."
   echo "and the wslay dependencies: python-sphinx libcunit1 nettle"
-  exit 0;
+  exit 1;
 fi
