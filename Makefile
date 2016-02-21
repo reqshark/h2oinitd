@@ -1,4 +1,4 @@
-.PHONY: install h2o
+.PHONY: install
 
 # check for basic deps
 HAVE_GIT := $(shell which git)
