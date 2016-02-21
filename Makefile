@@ -69,7 +69,7 @@ install:
 	if [ -f "/srv/h2o/index.html" ]; then rm /srv/h2o/index.html; fi
 	if [ ! -d "/var/log" ]; then mkdir /var/log; fi
 	cp index.html /srv/h2o/index.html
-	cp h2o.conf /etc/h2o/h2o.conf
+	cp h2o.yml /etc/h2o/h2o.conf
 	cp h2o /etc/init.d/h2o
 	chmod a+x /etc/init.d/h2o
 	update-rc.d h2o defaults

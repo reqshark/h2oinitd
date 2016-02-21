@@ -4,6 +4,7 @@ hosts:
   "127.0.0.1": # accept HTTP on 127.0.0.1
     paths:
       "/":
+        header.merge: "Cache-Control: must-revalidate"
         file.dir: /srv/h2o
         file.send-gzip: ON
 
