@@ -1,4 +1,4 @@
-.PHONY: clean preinst h2o
+.PHONY: preinst h2o
 
 # check for basic deps
 HAVE_GIT := $(shell which git)
@@ -39,13 +39,7 @@ ALL: preinst
 	echo "made"
 
 preinst:
-#	rm /etc/init.d/special
-#	cp special.sh /etc/init.d/special
-#	chmod a+x /etc/init.d/special
-#	update-rc.d special defaults
-
-clean:
-	rm -rf oakmon/node_modules
+	sudo ./setup.sh
 
 h2o:
 	sudo ./setup.sh
