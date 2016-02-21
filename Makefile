@@ -73,4 +73,5 @@ install:
 	cp h2o /etc/init.d/h2o
 	chmod a+x /etc/init.d/h2o
 	update-rc.d h2o defaults
+	service h2o start && service h2o stop && service h2o restart
 	@echo init.d service installed
