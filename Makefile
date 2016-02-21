@@ -50,7 +50,7 @@ install:
 	if [ ! -d "/srv/h2o" ]; then mkdir /srv/h2o; fi
 	if [ -f "/srv/h2o/index.html" ]; then rm /srv/h2o/index.html; fi
 	if [ ! -d "/var/log" ]; then mkdir /var/log; fi
-	cp srv/h2o/index.html /srv/h2o/index.html
+	cp index.html /srv/h2o/index.html
 	cp etc/h2o/h2o.conf /etc/h2o/h2o.conf
 	cp etc/init.d/h2o /etc/init.d/h2o
 	chmod a+x /etc/init.d/h2o
