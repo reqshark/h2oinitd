@@ -74,6 +74,3 @@ install:
 	chmod a+x /etc/init.d/h2o
 	update-rc.d h2o defaults
 	@echo init.d service installed
-
-h2o:
-	./setup.sh
