@@ -1,8 +1,7 @@
-# h2o w/ init.d service on linux
-the defualt conf in [/etc/h2o/h2o.conf](h2o.yml) listens for all hosts on port
-80, so make sure to disable any other port 80 services, like nginx or apache.
+# h2o init.d service on linux
+a generic conf in [/etc/h2o/h2o.conf](h2o.yml) listens for hosts on port 80
 
-# install h2o with the init.d service
+# install h2o and the init.d service
 ```sh
 $ git clone https://github.com/reqshark/h2oconf && cd h2oconf
 $ ./configure
