@@ -3,7 +3,7 @@ a generic conf in [/etc/h2o/h2o.conf](h2o.yml) listens for hosts on port 80
 
 # install h2o and the init.d service
 ```sh
-$ git clone https://github.com/reqshark/h2oconf && cd h2oconf
+$ git clone https://github.com/reqshark/h2oinitd.git && cd h2oinitd
 $ ./configure
 $ make                # installs h2o in /usr/local/bin
 $ sudo make install   # installs an init.d service for h2o

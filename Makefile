@@ -43,20 +43,20 @@ ALL:
 	@echo installing h2o)
 	git clone --depth 1 https://github.com/libuv/libuv.git && libuv/autogen.sh
 	cd libuv && ./configure
-	cd libuv && make && sudo make install && sudo /sbin/ldconfig
+	cd libuv && make -j8 && sudo make install && sudo /sbin/ldconfig
 	rm -rf libuv && git clone --depth 1 https://github.com/tatsuhiro-t/wslay.git
 	cd wslay && autoreconf -i && automake && autoconf && ./configure && make
 	cd wslay && sudo make install && sudo /sbin/ldconfig
 	rm -rf wslay
-	wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2f.tar.gz
-	tar xzvf OpenSSL_1_0_2f.tar.gz && rm OpenSSL_1_0_2f.tar.gz
-	mv openssl-OpenSSL_1_0_2f ssl
+	wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz
+	tar xzvf OpenSSL_1_0_2l.tar.gz && rm OpenSSL_1_0_2l.tar.gz
+	mv openssl-OpenSSL_1_0_2l ssl
 	cd ssl && ./config --prefix=/usr/local --openssldir=/usr/local/openssl
-	cd ssl && make && sudo make install && sudo /sbin/ldconfig
-	rm -rf ssl && wget https://github.com/h2o/h2o/archive/v1.7.0.tar.gz
-	tar xzvf v1.7.0.tar.gz && rm v1.7.0.tar.gz
-	cd h2o-1.7.0 && cmake -DWITH_BUNDLED_SSL=off . && make && sudo make install
-	sudo /sbin/ldconfig && rm -rf h2o-1.7.0
+	cd ssl && make -j8 && sudo make install && sudo /sbin/ldconfig
+	rm -rf ssl && wget https://github.com/h2o/h2o/archive/master.tar.gz
+	tar xzvf master.tar.gz && rm master.tar.gz
+	cd h2o-master && cmake -DWITH_BUNDLED_SSL=off . && make && sudo make install
+	sudo /sbin/ldconfig && rm -rf h2o-master
 	echo "h2o installed" && h2o --version
 
 install:
