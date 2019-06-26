@@ -3,8 +3,7 @@
 APT=`which apt`
 if [ -x "$APT" ]; then
   echo "apt is executable, it's ubuntu or debian..."; sleep 1;
-  sudo apt-get update && sudo apt-get upgrade -y
-  sudo apt-get install git build-essential cmake zlib1g-dev python-sphinx \
+  sudo apt-get install git-core build-essential cmake zlib1g-dev python-sphinx \
   libcunit1-dev libgmp-dev libgmpxx4ldbl libmpfr-dev libyaml-dev checkinstall \
   libtool gawk locate autoconf pkg-config -y
   wget https://ftp.gnu.org/gnu/nettle/nettle-3.4.tar.gz && tar xzvf nettle-3.4.tar.gz
